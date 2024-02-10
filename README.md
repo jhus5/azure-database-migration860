@@ -115,20 +115,118 @@ Once you have installed SSMS on your local machine or an Azure Virtual Machine, 
 
 ### 5. Restoring Database in SQL Server
 
-1: Identify the Backup Files
+1. Identify the Backup Files
 Before restoring a database, ensure that you have the necessary backup files available. Once you have this file you will have to copy it to C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup or the equivalent SQL Server folder on your local machine.
 
-Step 2: Connect to SQL Server
+2. Connect to SQL Server
 Open SQL Server Management Studio (SSMS) and connect to the SQL Server instance where you want to perform the database restoration.
 
-Step 3: Initiate Database Restore
+3. Initiate Database Restore
 Right-click on the Databases node in the Object Explorer, and then choose Restore Database...
 
-Step 4: Select the Source
+4. Select the Source
 In the Restore Database window, choose the Device option and click the ... button to select the backup files to restore. Click the Add button to navigate to the location of the backup files, select the appropriate full backup, and if needed, the differential and transaction log backups.
 
-Step 5: Choose the Restore Options
+5. Choose the Restore Options
 On the General page, ensure that the destination database name is correct. Optionally, specify a new database name if you want to restore with a different name. Click OK to perform the restoration. Once the restore has been completed you will be met with a message as the following: Database restored successfully.
 
 ## Conclusion
 In this milestone, we've set up a production environment for our Azure Database Migration project by creating an Azure Virtual Machine, installing SQL Server and SSMS, and restoring a backup database. We're now ready to proceed with migrating this database to Azure SQL Database in the upcoming milestones. Stay tuned for more!
+
+# Azure Database Migration: Milestone 4 - Data Backup and Restoration
+
+In this milestone, we'll outline the process of backing up our production database, securely storing backups in Azure Blob Storage, restoring the backups to a development environment, and setting up automated backups using Maintenance Plans in SQL Server Management Studio (SSMS).
+
+## Backing Up the Production Database
+
+Backing up your production database is a crucial step to ensure data protection and availability. We'll use SQL Server Management Studio (SSMS) to create a full backup:
+
+1. Connect to your production database in SSMS.
+2. Right-click on the database in Object Explorer and select `Tasks > Backup`.
+3. In the Back Up Database dialog, choose a descriptive name for your backup file, such as `ProductionDatabase_YYYYMMDD_HHMMSS`.
+4. Choose the backup type as `Full`, and select your backup destination as a local file. Ensure the backup file is saved in a secure location, such as a dedicated backup folder.
+5. Click `OK` to start the backup process.
+6. Monitor the progress of the backup in the Output window and wait for it to complete.
+
+## Securely Storing Backups in Azure Blob Storage
+
+To improve data security, we'll move our backups to Azure Blob Storage:
+
+1. Sign in to the [Azure Portal](https://portal.azure.com).
+2. Click on `Storage accounts` in the left sidebar under `Storage`.
+3. Create a new storage account or use an existing one. Make sure to note down the storage account name and access key for future reference.
+4. In the left sidebar, click on `Blob services` under your storage account.
+5. Create a new container named `backups`. Set appropriate access policies and permissions as needed.
+6. Install the Azure Storage Explorer to manage your blob storage easily.
+
+## Seamless Restoration onto the Development Environment
+
+To restore a backup to a development environment, follow these steps:
+
+1. Connect to your development database in SSMS.
+2. Right-click on the `Databases` node and select `Restore Database`.
+3. In the Restore Database dialog, choose a descriptive name for your restored database, such as `ProductionDatabase_Dev_YYYYMMDD_HHMMSS`.
+4. Select the backup file you created earlier from your local file system or Azure Blob Storage as the source.
+5. Choose `ProductionDatabase` as the destination database.
+6. Set the restore type to `Overwrite the existing database`.
+7. Click `OK` to start the restoration process.
+8. Monitor the progress of the restoration in the Output window and wait for it to complete.
+
+## Executing Automated Backups via Maintenance Plans in SSMS
+
+To automate backups, we'll create a maintenance plan in SQL Server Management Studio:
+
+1. Connect to your production database in SSMS.
+2. Right-click on the `Management` node and select `Maintenance Plans`.
+3. Click on `New Maintenance Plan`.
+4. Give your maintenance plan a descriptive name, such as `ProductionDatabase_Backup`.
+5. Add a new task to the maintenance plan by clicking on `Tasks > Backup > Full Database`.
+6. Configure your backup settings, such as the destination type (local file or Azure Blob Storage), naming conventions, and frequency.
+7. Add any necessary steps for cleaning up old backups, such as deleting them after a certain retention period.
+8. Save and run your maintenance plan to start automating regular backups of your production database.
+
+
+##Milestone 5: Data recovery simulation
+A data discovery simulation was performed in this milestone  by mimicking data loss in the production environment. 
+
+1. AdventureWorks22 > Tables and then proceeded to delete the first three tables:
+(a) AWBuildVersion
+(b) dbo.Database.log
+(c) dbo.ErrorLog
+
+
+
+
+2.
+
+
+
+
+data missing from azure data studio:
+
+
+
+
+
+before backup:
+
+
+
+
+
+
+
+restoring database:
+
+
+
+also verified successful backup in azure data studio:
+
+
+
+
+
+
+
+
+
