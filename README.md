@@ -280,6 +280,51 @@ Result of tailback:
 
 
 
+## Milestone 7: MS Entra id directory integration
 
+make sure you click ‘save’
+
+then disconnect from current connection and manage connection. Change to ‘Microsoft entra ID’
+
+
+
+
+
+### Creating a DB Reader User:
+
+
+Test the DB Reader's User Access:
+
+
+
+
+you will be …. prompted to change the password on first login:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+testing reading the database with success:
+
+
+testing access to modify to database which should fail
 
 
