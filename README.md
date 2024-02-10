@@ -225,6 +225,59 @@ also verified successful backup in azure data studio:
 
 
 
+## Milestone 6: Geo replication and failover
+ 
+### Geo replication of the same server in Azure SQL datbase:
+
+
+now we have two: primary and geo replica:
+
+
+
+### Test Failover and Tailback
+
+Initiating a Test Failover to the Secondary Region
+
+Create your failover group and add your single database to it using the Azure portal.
+    1. Select Azure SQL in the left-hand menu of the Azure portal. If Azure SQL isn't in the list, select All services, then type Azure SQL in the search box. (Optional) Select the star next to Azure SQL to favorite it and add it as an item in the left-hand navigation.
+    2. Select the database you want to add to the failover group.
+    3. Select the name of the server under Server name to open the settings for the server.
+       
+    4. Select Failover groups under the Settings pane, and then select Add group to create a new failover group.
+       
+    5. On the Failover Group page, enter or select the required values, and then select Create. Either create a new secondary server, or select an existing secondary server. The secondary server in the failover group must be in a different region than the primary server.
+        ◦ Databases within the group: Choose the database you want to add to your failover group. Adding the database to the failover group will automatically start the geo-replication process.
+       
+
+
+
+
+going to resource:
+
+
+
+
+Access fail-over groups:
+
+
+
+
+which should now indicate two servers in the fail-over group:
+
+
+select failover and yes:
+
+
+
+in a few moments you will see the servers swap roles where the replica is now the primary:
+
+Select Failover again to fail the servers back to their original roles
+
+By following these steps, you can safely perform a test failover to verify your disaster recovery environment's functionality. and then perform a tailback to revert to the primary region. 
+
+
+Result of tailback:
+
 
 
 
