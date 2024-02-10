@@ -3,13 +3,15 @@
 # Azure Database Migration: Milestone 1 - Setting Up the Production Environment
 
 ## Overview
-In this milestone, we'll outline the process of setting up a production environment for our Azure Database Migration project. This includes creating a virtual machine on Microsoft Azure and installing SQL Server 2019 Express LocalDB for development purposes. Additionally, we'll create the production database using T-SQL scripts.
+In this milestone, we outline the process of setting up a production environment for our Azure Database Migration project. 
+This includes creating a virtual machine on Microsoft Azure and installing SQL Server 2019 Express LocalDB in production. 
+Additionally, we'll create the production database.
 
 ## Prerequisites
 To follow this guide, make sure you have:
 1. An active Microsoft Azure account.
-2. Familiarity with the Azure Portal and PowerShell or CLI.
-3. Basic understanding of SQL Server, LocalDB, and T-SQL scripting.
+2. Familiarity with the Azure Portal.
+3. Basic understanding of SQL Server, Virtual machines, and T-SQL scripting.
 
 ## Steps to Create a Production Environment
 ### 1. Creating an Azure Virtual Machine
@@ -28,7 +30,7 @@ The mandatory fields to complete here are:
 
 ### Virtual machine name
 Region: Pick the region geographically closest to you
-Image: This represents the operating system of your virtual machine. In the example below we are provisioning a Linux VM using the Ubuntu Server 20.04 LTS image. Later we will learn how to connect to both Linux and Windows VMs. To provision a Windows VM you will need to select a Windows image such as Windows 11 Pro.
+Image: This represents the operating system of your virtual machine. In the example we are provisioning a Windows VM using the Windows 11 Pro image. Later we will learn how to connect to Windows VMs. To provision a Windows VM you will need to select a Windows image such as Windows 11 Pro.
 Size: Select the appropriate size of the virtual machine based on the resource requirements of your workload. To change the size you can click on See all sizes under the Size pane. Find the B2ms general purpose VM, a VM that is good for many workloads, and then press Select
 
 ### Administrator account
@@ -62,26 +64,10 @@ To connect to a Windows VM you can simply follow the instructions presented on t
 
 You will simply have to download the RDP connection file using the Download RDP file button. You will use this file to connect to the Windows VM, but first, you need to make sure your local machine has an RDP client installed.
 
-### Remote Desktop Client - Windows
-Windows machines usually have the Remote Desktop Client pre-installed. You can access it by typing Remote Desktop Connection"** in the Start menu search bar. If you don't already have this installed you can download the Remote Desktop app from the Microsoft Store for free. Here's how:
-
-Open the Microsoft Store from the Start menu
-Search for Microsoft Remote Desktop
-Click on the Microsoft Remote Desktop app and select Install
-
-### Remote Desktop Client - macOS
-You can download Microsoft Remote Desktop from the Mac App Store. Here's how:
-
-Open the App Store on your macOS device
-Search for Microsoft Remote Desktop
-Click on the Microsoft Remote Desktop app and select Get to install it
-To open the RDP connection using Microsoft Remote Desktop, simply drag and drop the .rdp file you downloaded from Azure in Microsoft Remote Desktop. This will add the machine to the PCs present in Microsoft Remote Desktop.
-
-To log into the VM, simply double-click the desired PC. This will redirect you to the following window:
-
-To sign in you will have to use the username and password you have setup during the VM provisioning. Once you have successfully connected you will have to go through setting up your new Windows machine.
 
 ### Remote Desktop Client - Linux
+=You can use the Remote Desktop Client from microsoft on Windows (from MS store) and Mac OS (from app store). But as I am on Ubuntu (Linux) I will be using Remmina. 
+
 Remmina is a popular open-source remote desktop client for Linux. It provides a graphical interface to connect to various remote desktop protocols, including RDP (Remote Desktop Protocol). If you have Remmina installed on your Linux system, you can launch it from the application menu or by typing remmina in the terminal.
 
 You can then open the previously downloaded .rdp file from Azure. This should prompt you to the following window:
@@ -186,24 +172,21 @@ To automate backups, we'll create a maintenance plan in SQL Server Management St
 8. Save and run your maintenance plan to start automating regular backups of your production database.
 
 
-##Milestone 5: Data recovery simulation
-A data discovery simulation was performed in this milestone  by mimicking data loss in the production environment. 
+## Milestone 5: Data recovery simulation (Refer to odt file for screenshots)
+As a test to restore database, I selected to delete the following three tables from the database.
 
-1. AdventureWorks22 > Tables and then proceeded to delete the first three tables:
+AdventureWorks22 > Tables and then proceeded to delete the first three tables:
 (a) AWBuildVersion
 (b) dbo.Database.log
 (c) dbo.ErrorLog
 
 
-
-
-2.
+2. You can see some errors already from the assessment summary: 
 
 
 
 
-data missing from azure data studio:
-
+and the three tables are missing from a quick inspection of the database from azure data studio:
 
 
 
@@ -223,9 +206,20 @@ restoring database:
 also verified successful backup in azure data studio:
 
 
+Carried out the same exercise from azure cloud services. This time I restored data back back a few hours, at 10AM this morning, before mimicking data loss:
+
+ 
+
+Deployment completed.
 
 
-## Milestone 6: Geo replication and failover
+
+
+
+
+
+
+## Milestone 6: Geo replication and failover (Refer to odt file for screenshots)
  
 ### Geo replication of the same server in Azure SQL datbase:
 
@@ -280,6 +274,9 @@ Result of tailback:
 
 
 
+
+
+
 ## Milestone 7: MS Entra id directory integration
 
 make sure you click ‘save’
@@ -287,6 +284,11 @@ make sure you click ‘save’
 then disconnect from current connection and manage connection. Change to ‘Microsoft entra ID’
 
 
+you will be unable to connect vis azure data studio if you fail to save previous action, as I found out:
+
+
+
+Thus I had to return to the previous screen on azure services (on browser window) and click save. This allowed me to log back in. 
 
 
 
@@ -316,15 +318,13 @@ you will be …. prompted to change the password on first login:
 
 
 
+Depending on your companies setup, you may be asked to setup MFA for the new user account. If this is the case, have your preferred MFA app at hand so you can follow the steps to authenticate the new user. 
 
 
+You can then proceed to connecting via azure data studio with the new credentials:
+After logging you should check that you have setup the user, testing reading the database with success:
 
 
-
-
-testing reading the database with success:
-
-
-testing access to modify to database which should fail
+testing access to modify to database which should fail, as this user should correctly only have read access.
 
 
