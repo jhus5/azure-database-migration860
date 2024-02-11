@@ -173,9 +173,14 @@ Backing up your production database is a crucial step to ensure data protection 
 
 1. Connect to your production database in SSMS.
 2. Right-click on the database in Object Explorer and select `Tasks > Backup`.
+
 <img src = screenshots/4a.png>
+
 3. In the Back Up Database dialog, choose a descriptive name for your backup file, such as `ProductionDatabase_YYYYMMDD_HHMMSS`.
 4. Choose the backup type as `Full`, and select your backup destination as a local file. Ensure the backup file is saved in a secure location, such as a dedicated backup folder.
+
+<img src = screenshots/4b.png>
+
 5. Click `OK` to start the backup process.
 6. Monitor the progress of the backup in the Output window and wait for it to complete.
 
@@ -186,22 +191,39 @@ To improve data security, we'll move our backups to Azure Blob Storage:
 1. Sign in to the [Azure Portal](https://portal.azure.com).
 2. Click on `Storage accounts` in the left sidebar under `Storage`.
 3. Create a new storage account or use an existing one. Make sure to note down the storage account name and access key for future reference.
+In our case we created a new storage account by selecting 'create' and proceeding to complete the fields as below:
+<img src = screenshots/4c.png>.
+In the next step just confirm, agree and create. Then proceed onto the next step.
+<img src = screenshots/4d.png>
 4. In the left sidebar, click on `Blob services` under your storage account.
-5. Create a new container named `backups`. Set appropriate access policies and permissions as needed.
-6. Install the Azure Storage Explorer to manage your blob storage easily.
+<img src = screenshots/4e.png>
+5. Create a new container and provide it with a name such as `backups` in our case we will it 'aw22-container'. Set appropriate access policies and permissions as needed.
+<img src = screenshots/4f.png>
+<img src = screenshots/4g.png>
+6. Optional, you can install the Azure Storage Explorer to manage your blob storage easily.
 
-## Seamless Restoration onto the Development Environment
+You can then access the container and #Upload' any file. In our case we uploaded the backup file we previously created to safely store in on the cloud.
 
-To restore a backup to a development environment, follow these steps:
+<img src = screenshots/4h.png>
 
-1. Connect to your development database in SSMS.
-2. Right-click on the `Databases` node and select `Restore Database`.
-3. In the Restore Database dialog, choose a descriptive name for your restored database, such as `ProductionDatabase_Dev_YYYYMMDD_HHMMSS`.
-4. Select the backup file you created earlier from your local file system or Azure Blob Storage as the source.
-5. Choose `ProductionDatabase` as the destination database.
-6. Set the restore type to `Overwrite the existing database`.
-7. Click `OK` to start the restoration process.
-8. Monitor the progress of the restoration in the Output window and wait for it to complete.
+## Creating a Development environment. 
+Now that we have our production environment up and running, we will create a development environment, where users can create, test, and modify the database without affecting the production environment.
+
+In order to do this please go back and follow the above steps and provide a new name, in or case we named it 'dev-env-wvm' to the previous name.
+
+<img src = screenshots/4i.png>
+
+## Migrating database to development environment
+
+To restore a backup to a development environment, we followed the '5. Restoring Database in SQL Server' but utilising the back up database that we created in from the production environment. 
+
+1. Creating an Azure SQL Database, which will serve as the target for migrating your on-premise database.
+2. Install and configure Azure Data Studio on your production Windows VM. Use this tool to establish a connection to the existing on-premise database.
+3. Schema migration. After establishing connections to both databases, proceed to install the SQL Server Schema Compare extension within Azure Data Studio.
+Leverage this extension to compare and subsequently migrate the schema from the on-premise database to the Azure SQL Database.
+4. Data migration. With the successful execution of the schema migration, you are now prepared to move forward with the data migration phase. Begin by installing the Azure SQL Migration extension within Azure Data Studio.
+5. To confirm the success of the database migration process, carry out a comprehensive validation. Thoroughly inspect the data, schema, and any configurations of the migrated database, ensuring that the migration has been executed successfully and adheres to principles of data integrity.
+
 
 ## Executing Automated Backups via Maintenance Plans in SSMS
 
@@ -217,7 +239,7 @@ To automate backups, we'll create a maintenance plan in SQL Server Management St
 8. Save and run your maintenance plan to start automating regular backups of your production database.
 
 
-## Milestone 5: Data recovery simulation (Refer to odt file for screenshots)
+## Milestone 5: Data recovery simulation
 As a test to restore database, I selected to delete the following three tables from the database.
 
 AdventureWorks22 > Tables and then proceeded to delete the first three tables:
