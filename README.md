@@ -64,7 +64,7 @@ By default, Azure blocks all incoming traffic to virtual machines, so you need t
 ### Enabling RDP Access for Windows VMs
 For Windows VMs, Remote Desktop Protocol (RDP) is used to enable remote access. The Administrator username and password you were prompted to set up will be used for RDP access to the VM. To avoid any issues connecting to the VM later, ensure that the RDP port (port 3389) is allowed in the NSG inbound rules for the VM. In most cases, the default rule is automatically created, allowing traffic on port 3389. If not, you might need to add or adjust the rule to permit RDP traffic.
 
-### Finalizing provisioning a Windows VM
+### Finalising provisioning a Windows VM
 Now that we have completed all the necessary information you will first have to tick I confirm I have an eligible Windows 10/11 license with multi-tenant hosting rights. before proceeding with the Review + create button. Azure will now validate the VM's configuration, and once the validation has passed we will click Create.
 
 ### 2. Connecting to a Virtual Machine
