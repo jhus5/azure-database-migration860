@@ -163,6 +163,66 @@ We are now ready to move onto migrating the database from our vm (on-premise) to
 ## Conclusion
 In this milestone, we've set up a production environment for our Azure Database Migration project by creating an Azure Virtual Machine, installing SQL Server and SSMS, and restoring a backup database. We're now ready to proceed with migrating this database to Azure SQL Database in the upcoming milestones. Stay tuned for more!
 
+## Migrating database to Azure SQL Server
+In order to migrate the databse to the new development environment we can utilise Azure Data Studio and acrry out the following steps:
+
+- Creating an Azure SQL Database
+- Install and connect to Azure Database Studio
+- Schema Migration
+- Data Migration
+
+Let's begin!
+
+### Azure SQL Database
+
+Creating an Azure SQL Database, which will serve as the target for migrating your on-premise database.
+
+1. Go to Azure Portal and search for 'SQL databases' or click on the icon
+<img src = screenshots/2a.png>
+2. To create a SQL database click on the Create button, and begin filling in the required information. 
+<img src = screenshots/2b.png>
+
+For Subscription select the subscription associated with the account, and for Resource group create a new one, here we called it 'AdventureWorks2022'. 
+<img src = screenshots/2c.png>
+
+We changed the compute tier to basic for this exercise.
+
+<img src = screenshots/2d.png>
+
+Click 'Create' and wait for the Azure Database to be created. This can take a few minutes.
+
+<img src = screenshots/2e.png>
+
+By default, the Public Network Access setting is set to Deny, therefore we need to change this.
+
+In order to do this you need to select the new SQL database and select 'Configure' from the overview page:
+
+<img src = screenshots/2f.png>
+
+Then select 'Selcted networks' under Public network access and click on save. This step is important.
+
+<img src = screenshots/2g.png>
+
+This then allows you to add IP address. However, if you're environments are on the Azure cloud then you can simply check 'Allow azure services and resources to access this server' and you should be good. Then select save.
+
+<img src = screenshots/2h.png>
+
+
+### Azure Database Studio
+
+1. Install and configure Azure Data Studio (download page: https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio) on your production Windows VM. 
+2. Use Azure Data Studio to establish a connection to the existing on-premise database.
+
+### Schema Migration
+After establishing connections to both databases, proceed to 
+1. install the SQL Server Schema Compare extension within Azure Data Studio.
+2. Leverage this extension to compare and subsequently migrate the schema from the on-premise database to the Azure SQL Database.
+
+### Data Migration and validation
+1. Data migration. With the successful execution of the schema migration, you are now prepared to move forward with the data migration phase. Begin by installing the Azure SQL Migration extension within Azure Data Studio.
+2. To confirm the success of the database migration process, carry out a comprehensive validation. Thoroughly inspect the data, schema, and any configurations of the migrated database, ensuring that the migration has been executed successfully and adheres to principles of data integrity.
+
+
 # Azure Database Migration: Milestone 4 - Data Backup and Restoration
 
 In this milestone, we'll outline the process of backing up our production database, securely storing backups in Azure Blob Storage, restoring the backups to a development environment, and setting up automated backups using Maintenance Plans in SQL Server Management Studio (SSMS).
@@ -206,23 +266,13 @@ You can then access the container and #Upload' any file. In our case we uploaded
 
 <img src = screenshots/4h.png>
 
+
 ## Creating a Development environment. 
 Now that we have our production environment up and running, we will create a development environment, where users can create, test, and modify the database without affecting the production environment.
 
 In order to do this please go back and follow the above steps and provide a new name, in or case we named it 'dev-env-wvm' to the previous name.
 
 <img src = screenshots/4i.png>
-
-## Migrating database to development environment
-
-To restore a backup to a development environment, we followed the '5. Restoring Database in SQL Server' but utilising the back up database that we created in from the production environment. 
-
-1. Creating an Azure SQL Database, which will serve as the target for migrating your on-premise database.
-2. Install and configure Azure Data Studio on your production Windows VM. Use this tool to establish a connection to the existing on-premise database.
-3. Schema migration. After establishing connections to both databases, proceed to install the SQL Server Schema Compare extension within Azure Data Studio.
-Leverage this extension to compare and subsequently migrate the schema from the on-premise database to the Azure SQL Database.
-4. Data migration. With the successful execution of the schema migration, you are now prepared to move forward with the data migration phase. Begin by installing the Azure SQL Migration extension within Azure Data Studio.
-5. To confirm the success of the database migration process, carry out a comprehensive validation. Thoroughly inspect the data, schema, and any configurations of the migrated database, ensuring that the migration has been executed successfully and adheres to principles of data integrity.
 
 
 ## Executing Automated Backups via Maintenance Plans in SSMS
@@ -239,7 +289,7 @@ To automate backups, we'll create a maintenance plan in SQL Server Management St
 8. Save and run your maintenance plan to start automating regular backups of your production database.
 
 
-## Milestone 5: Data recovery simulation
+## Milestone 5: Disaster Recovery Simulation
 As a test to restore database, I selected to delete the following three tables from the database.
 
 AdventureWorks22 > Tables and then proceeded to delete the first three tables:
