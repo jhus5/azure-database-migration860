@@ -131,15 +131,15 @@ C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup
 <img src = screenshots/1i.png>
 
 5. Select Device and then select the ellipses (...) to choose a device.
-
+<img src = screenshots/1j.png>
 6. Select Add and then choose the .bak file you recently moved to the backup location.
-
+<img src = screenshots/1k.png>
 7. Select OK to confirm your database backup selection and close the Select backup devices window.
 
 8. Check the Files tab to confirm the Restore as location and file names match your intended location and file names in the Restore Database wizard.
 
 9. Select OK to restore your database.
-<img src = screenshots/1j.png>
+<img src = screenshots/1l.png>
 
 
 ### 4. Connecting to SQL Server Using SSMS
