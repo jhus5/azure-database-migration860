@@ -283,10 +283,11 @@ make sure you click ‘save’
 
 then disconnect from current connection and manage connection. Change to ‘Microsoft entra ID’
 
+ <img src = screenshots/7a.png>
 
 you will be unable to connect vis azure data studio if you fail to save previous action, as I found out:
 
-
+ <img src = screenshots/7b.png>
 
 Thus I had to return to the previous screen on azure services (on browser window) and click save. This allowed me to log back in. 
 
@@ -294,36 +295,29 @@ Thus I had to return to the previous screen on azure services (on browser window
 
 ### Creating a DB Reader User:
 
+ <img src = screenshots/7c.png>
 
 Test the DB Reader's User Access:
 
-
+ <img src = screenshots/7d.png>
 
 
 you will be …. prompted to change the password on first login:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ <img src = screenshots/7e.png>
+ 
+ <img src = screenshots/7f.png>
+ 
+  <img src = screenshots/7g.png>
 
 Depending on your companies setup, you may be asked to setup MFA for the new user account. If this is the case, have your preferred MFA app at hand so you can follow the steps to authenticate the new user. 
 
+ <img src = screenshots/7h.png>
 
 You can then proceed to connecting via azure data studio with the new credentials:
 After logging you should check that you have setup the user, testing reading the database with success:
 
+ <img src = screenshots/7i.png>
 
 testing access to modify to database which should fail, as this user should correctly only have read access.
 
