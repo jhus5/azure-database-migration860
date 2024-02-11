@@ -112,8 +112,25 @@ The next step is to install the applications required on your VM, Here's a step-
 7. Download SQL Server Management Studio (SSMS): After the SQL Server installation is complete, proceed to install SQL Server Management Studio (SSMS) on the Azure VM using the Install SSMS button from the SQL Server Installation Wizard. This will redirect you to the Microsoft website. Download the latest version of SSMS from the Microsoft Download Center.
 8. Install SQL Server Management Studio (SSMS): Run the SSMS installer on the Azure VM and follow the on-screen instructions to install the tool
 
-#### Creating the Production database
-Now we are at the stage to create our production database. The databse we utilised is the AdventureWorks sample databases, which can be found at: https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms
+### 4. Connecting to SQL Server Using SSMS
+
+We will follow these steps to connect to SQL Server:
+
+1. Launch SSMS : Open SQL Server Management Studio by searching for SSMS in the Windows Start Menu or by clicking its icon on your desktop.
+
+<img src = screenshots/1m.png>
+
+2. Connect to Server: After launching SSMS, you will be prompted to connect to a server. In the Connect to Server window, enter the server name or IP address of the SQL Server instance you want to connect to. This might be automatically filled up for you with your server name. 
+<img src = screenshots/1n.png>
+
+3. Connect: Click the Connect button to initiate the connection to the SQL Server instance using the specified credentials
+
+4. Connected to SQL Server: Upon successful connection, you will see the Object Explorer window will open on the left side of the SSMS interface.
+
+<img src = screenshots/1o.png>
+
+### 5. Restoring Database in SQL Server
+Now we are at the stage to create our production database. The database we utilised is the AdventureWorks sample databases, which can be found at: https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms
 
 We then resotored the database to our SQL server using SSMS.
 
@@ -141,32 +158,7 @@ C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup
 9. Select OK to restore your database.
 <img src = screenshots/1l.png>
 
-
-### 4. Connecting to SQL Server Using SSMS
-Once you have installed SSMS on your local machine or an Azure Virtual Machine, you can follow these steps to connect to SQL Server:
-
-1. Launch SQL Server Management Studio : Open SQL Server Management Studio by searching for SSMS in the Windows Start Menu or by clicking its icon on your desktop.
-2. Connect to Server: After launching SSMS, you will be prompted to connect to a server. In the Connect to Server window, enter the server name or IP address of the SQL Server instance you want to connect to. This might be automatically filled up for you with your server name. 
-3. Connect: Click the Connect button to initiate the connection to the SQL Server instance using the specified credentials
-4. Connected to SQL Server: Upon successful connection, you will see the Object Explorer window will open on the left side of the SSMS interface.
-5. 
-
-### 5. Restoring Database in SQL Server
-
-1. Identify the Backup Files
-Before restoring a database, ensure that you have the necessary backup files available. Once you have this file you will have to copy it to C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup or the equivalent SQL Server folder on your local machine.
-
-2. Connect to SQL Server
-Open SQL Server Management Studio (SSMS) and connect to the SQL Server instance where you want to perform the database restoration.
-
-3. Initiate Database Restore
-Right-click on the Databases node in the Object Explorer, and then choose Restore Database...
-
-4. Select the Source
-In the Restore Database window, choose the Device option and click the ... button to select the backup files to restore. Click the Add button to navigate to the location of the backup files, select the appropriate full backup, and if needed, the differential and transaction log backups.
-
-5. Choose the Restore Options
-On the General page, ensure that the destination database name is correct. Optionally, specify a new database name if you want to restore with a different name. Click OK to perform the restoration. Once the restore has been completed you will be met with a message as the following: Database restored successfully.
+We are now ready to move onto migrating the database from our vm (on-premise) to the azure sql server (cloud).
 
 ## Conclusion
 In this milestone, we've set up a production environment for our Azure Database Migration project by creating an Azure Virtual Machine, installing SQL Server and SSMS, and restoring a backup database. We're now ready to proceed with migrating this database to Azure SQL Database in the upcoming milestones. Stay tuned for more!
@@ -181,6 +173,7 @@ Backing up your production database is a crucial step to ensure data protection 
 
 1. Connect to your production database in SSMS.
 2. Right-click on the database in Object Explorer and select `Tasks > Backup`.
+<img src = screenshots/4a.png>
 3. In the Back Up Database dialog, choose a descriptive name for your backup file, such as `ProductionDatabase_YYYYMMDD_HHMMSS`.
 4. Choose the backup type as `Full`, and select your backup destination as a local file. Ensure the backup file is saved in a secure location, such as a dedicated backup folder.
 5. Click `OK` to start the backup process.
