@@ -327,4 +327,4 @@ After logging you should check that you have setup the user, testing reading the
 
 testing access to modify to database which should fail, as this user should correctly only have read access.
 
- <img src = “screenshots/7j.png”>
+ <img src = screenshots/7j.png>
