@@ -180,52 +180,48 @@ AdventureWorks22 > Tables and then proceeded to delete the first three tables:
 (b) dbo.Database.log
 (c) dbo.ErrorLog
 
+<img src = screenshots/5a.png>
 
 2. You can see some errors already from the assessment summary: 
 
-
+ <img src = screenshots/5b.png>
 
 
 and the three tables are missing from a quick inspection of the database from azure data studio:
 
-
+ <img src = screenshots/5c.png>
 
 
 before backup:
 
-
-
-
-
-
+ <img src = screenshots/5d.png>
 
 restoring database:
 
-
-
+ <img src = screenshots/5e.png>
+ <img src = screenshots/5f.png>
 also verified successful backup in azure data studio:
 
-
+ <img src = screenshots/5g.png>
+ 
 Carried out the same exercise from azure cloud services. This time I restored data back back a few hours, at 10AM this morning, before mimicking data loss:
 
- 
+ <img src = screenshots/5h.png>
 
 Deployment completed.
 
-
-
-
-
-
+ <img src = screenshots/5i.png>
 
 
 ## Milestone 6: Geo replication and failover (Refer to odt file for screenshots)
  
 ### Geo replication of the same server in Azure SQL datbase:
 
+<img src = screenshots/6a.png>
 
 now we have two: primary and geo replica:
 
+ <img src = screenshots/6b.png>
 
 
 ### Test Failover and Tailback
@@ -243,38 +239,31 @@ Create your failover group and add your single database to it using the Azure po
         ◦ Databases within the group: Choose the database you want to add to your failover group. Adding the database to the failover group will automatically start the geo-replication process.
        
 
-
-
+ <img src = screenshots/6f.png>
 
 going to resource:
-
-
-
+ <img src = screenshots/6g.png>
 
 Access fail-over groups:
-
-
-
+ <img src = screenshots/6h.png>
 
 which should now indicate two servers in the fail-over group:
-
+ <img src = screenshots/6i.png>
 
 select failover and yes:
-
+ <img src = screenshots/6j.png>
 
 
 in a few moments you will see the servers swap roles where the replica is now the primary:
+ <img src = screenshots/6k.png>
 
 Select Failover again to fail the servers back to their original roles
 
 By following these steps, you can safely perform a test failover to verify your disaster recovery environment's functionality. and then perform a tailback to revert to the primary region. 
-
+ <img src = screenshots/6l.png>
 
 Result of tailback:
-
-
-
-
+ <img src = screenshots/6m.png>
 
 
 ## Milestone 7: MS Entra id directory integration
