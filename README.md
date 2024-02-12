@@ -508,15 +508,15 @@ testing access to modify to database which should fail, as this user should corr
  
  ## This completes the project. We have now:
 
-- setup a production (on-prem) database with a cloud backup on a weekly schedule
+- Setup a production (on-prem) database with a cloud backup on a weekly schedule
  <img src = screenshots/8a.png>
- - installed utilities like Azure Datbase Studio (with extensions) and SSMS to backup and migrate data
+- Installed utilities like Azure Datbase Studio (with extensions) and SSMS to backup and migrate data
  <img src = screenshots/8b.png>
- - setup a development environement, mimicking the production environment, for developers to work on setup azure storage services so we can back up and restore dev environements
+- Setup a development environment, mimicking the production environment, for developers to work on setup azure storage services so we can back up and restore dev environements
   <img src = screenshots/8c.png>
- - setup a geo-replca of the production database as a failover in any data loss event on our primary server
+- setup a geo-replca of the production database as a failover in any data loss event on our primary server
    <img src = screenshots/8d.png>
- - and finally we controlled access to the production environment by using MS Entra ID to create sepearte Admina dn User (read-only) accounts.
+- and finally we controlled access to the production environment by using MS Entra ID to create seperate Admin and User (read-only) accounts.
    <img src = screenshots/8e.png>
 
 The overall picture of the project on azure cloud can be seen on the following uml diagram:
