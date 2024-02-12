@@ -464,17 +464,15 @@ Result of tailback:
 
 ## Milestone 7: MS Entra id directory integration
 
-make sure you click ‘save’
-
-then disconnect from current connection and manage connection. Change to ‘Microsoft entra ID’
+Make sure you click ‘save’ then disconnect from current connection and manage connection. Change to ‘Microsoft entra ID’
 
  <img src = screenshots/7a.png>
 
-you will be unable to connect vis azure data studio if you fail to save previous action, as I found out:
+We will be unable to connect vis azure data studio if you fail to save previous action, as we experienced:
 
  <img src = screenshots/7b.png>
 
-Thus I had to return to the previous screen on azure services (on browser window) and click save. This allowed me to log back in. 
+Thus, we had to return to the previous screen on azure services (on browser window) and click save. This allowed us to log back in. 
 
 
 
