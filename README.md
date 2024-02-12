@@ -185,6 +185,9 @@ Creating an Azure SQL Database, which will serve as the target for migrating you
 For Subscription select the subscription associated with the account, and for Resource group create a new one, here we called it 'AdventureWorks2022'. 
 <img src = screenshots/2c.png>
 
+We need to create a server at this point. Select 'Create new', and add details of the server name, location and authentication method (SQL authentication) on the following screen
+<img src = screenshots/2i.png>
+
 We changed the compute tier to basic for this exercise.
 
 <img src = screenshots/2d.png>
@@ -199,7 +202,7 @@ In order to do this you need to select the new SQL database and select 'Configur
 
 <img src = screenshots/2f.png>
 
-Then select 'Selcted networks' under Public network access and click on save. This step is important.
+Then select 'Selected networks' under Public network access and click on save. This step is important.
 
 <img src = screenshots/2g.png>
 
@@ -211,16 +214,86 @@ This then allows you to add IP address. However, if you're environments are on t
 ### Azure Database Studio
 
 1. Install and configure Azure Data Studio (download page: https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio) on your production Windows VM. 
+
 2. Use Azure Data Studio to establish a connection to the existing on-premise database.
+Click server icon and select new connection
+<img src = screenshots/2j.png>
+and enter connection details such as server name (in this case localhost), Windows Authentication, and login credentials; and enable Trust server certificate.
+<img src = screenshots/2k.png>
+Then click connect to establish a connection to the (local) server.
+
+3. Repeat the above steps to connect to the Azure SQL Database.
+
+This time use the server name and SQL Server authentication and login details from the Azure SQL Server that you created, in the previous step. If you have any connection issues go back to Azure SQL Database to ensure that you have enabled 'selected networks' and 'Allow azure services and resources to access this server'. 
+
 
 ### Schema Migration
-After establishing connections to both databases, proceed to 
+After establishing connections to both databases, proceed to: 
 1. install the SQL Server Schema Compare extension within Azure Data Studio.
+- click on the Extensions icon in the Activity Bar. Search for and install the SQL Server Schema Compare extension.
+<img src = screenshots/2l.png>
+
 2. Leverage this extension to compare and subsequently migrate the schema from the on-premise database to the Azure SQL Database.
+
+- Once the SQL Server Schema Compare extension is installed, click on the Server icon in the Activity Bar. Select your local SQL Server database from the list of connected servers.
+<img src = screenshots/2m.png>
+- Right-click on the database and choose Schema Compare to create a new migration project
+<img src = screenshots/2n.png>
+- In the Schema Compare dialog, configure the source connection to your local SQL Server database and the target connection to your Azure SQL Database.
+
+<img src = screenshots/2o.png>
+
+- Click Compare at the top of the Schema Compare page in Azure Data Studio.
+<img src = screenshots/2p.png>
+- Select all desired schema changes and click Apply at the top of the page. Confirm "Yes" when prompted to update the target.
+- The local database schema will now match that of the Azure SQL Database after applying selected schema changes. This foundation prepares you for further steps in the migration process.
+- Upon successful application of the schema changes, you will see "Apply schema compare changes succeeded." Refresh the Tables node in your Azure SQL connection to view the updated schema.
+<img src = screenshots/2p.png>
+
+Note this does not mean any data has been migrated yet. We shall do this in the next stage.
+
 
 ### Data Migration and validation
 1. Data migration. With the successful execution of the schema migration, you are now prepared to move forward with the data migration phase. Begin by installing the Azure SQL Migration extension within Azure Data Studio.
-2. To confirm the success of the database migration process, carry out a comprehensive validation. Thoroughly inspect the data, schema, and any configurations of the migrated database, ensuring that the migration has been executed successfully and adheres to principles of data integrity.
+- In Azure Data Studio, go to the Extensions view and search for the Azure SQL Migration extension and add this extension to your environment.
+<img src = screenshots/2r.png>
+- Click on the Server icon and select your desired your local SQL Server database from the list of connected servers
+
+- Right-click on the server and select Manage. In the following window, under General click on Azure SQL Migration and then click on the Migrate to Azure SQL button
+<img src = screenshots/2s.png>
+
+<img src = screenshots/2t.png>
+
+- This will open the Migration Wizard. In the first step you will be asked to select the database you want to migrate (in this case sales_database).
+
+<img src = screenshots/2u.png>
+
+- In the following step the Wizard will assess if the database can be migrated to Azure and will provide you with potential Azure SQL targets. Then click 'Next'. we will select 'Azure SQL Database'.
+
+<img src = screenshots/2v.png>
+
+- For Step 3 of the Migration Wizard, you will have to configure the Azure SQL target. Start by selecting your desired subscription, resource group and SQL Database Server. Then you will have to provide the login credentials to connect to this server. Once successfully connected you will be able to select the desired target database.
+
+
+<img src = screenshots/2w.png>
+
+we then need to download and install integration runtime, then use the generated Key(s) to register the integration runtime.
+<img src = screenshots/2x.png>
+
+In the next step we need to first provide the password for Windows authentication to the local SQL Server and select the tables that we want to migrate from source to target. 
+<img src = screenshots/2y.png>
+
+Then run validation. Once this is successful we can proceed tgo start migration. 
+
+<img src = screenshots/2z.png>
+
+2. To confirm the success of the database migration process, you can carry out a check by running sql queries for comparisons.
+You can do so by selecting a table from within the Azure Server > right-click and 'Select top 1000'.
+<img src = screenshots/2aa.png>
+
+You should now see entries in these databses:
+
+<img src = screenshots/2ab.png>
 
 
 # Azure Database Migration: Milestone 4 - Data Backup and Restoration
