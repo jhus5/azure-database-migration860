@@ -491,7 +491,7 @@ you will be …. prompted to change the password on first login:
  
  <img src = screenshots/7f.png>
  
-  <img src = screenshots/7g.png>
+ <img src = screenshots/7g.png>
 
 Depending on your companies setup, you may be asked to setup MFA for the new user account. If this is the case, have your preferred MFA app at hand so you can follow the steps to authenticate the new user. 
 
@@ -506,19 +506,19 @@ testing access to modify to database which should fail, as this user should corr
 
  <img src = screenshots/7j.png>
  
- ## This completes the project. We have now setup a:
+ ## This completes the project. We have now:
 
-- productopm (on-prem) database with a cloud backup on a weekly schedule
+- setup a production (on-prem) database with a cloud backup on a weekly schedule
  <img src = screenshots/8a.png>
- - created a installed utilities like Azure Datbase Studio (with extensions) and SSMS to backup and migrate data
+ - installed utilities like Azure Datbase Studio (with extensions) and SSMS to backup and migrate data
  <img src = screenshots/8b.png>
- - we also created a development environement, mimicking the production environment, for developers to work on setup azure storage services so we can back up and restore dev environements
+ - setup a development environement, mimicking the production environment, for developers to work on setup azure storage services so we can back up and restore dev environements
   <img src = screenshots/8c.png>
- - we then created geo-replca of the production database as a failover in any data loss event on our primary server
+ - setup a geo-replca of the production database as a failover in any data loss event on our primary server
    <img src = screenshots/8d.png>
  - and finally we controlled access to the production environment by using MS Entra ID to create sepearte Admina dn User (read-only) accounts.
    <img src = screenshots/8e.png>
+
 The overall picture of the project on azure cloud can be seen on the following uml diagram:
- 
     <img src = screenshots/8f.png>
 
