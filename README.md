@@ -425,13 +425,13 @@ now we have two: primary and geo replica:
 Initiating a Test Failover to the Secondary Region
 
 Create your failover group and add your single database to it using the Azure portal.
-    1. Select Azure SQL in the left-hand menu of the Azure portal. If Azure SQL isn't in the list, select All services, then type Azure SQL in the search box. (Optional) Select the star next to Azure SQL to favorite it and add it as an item in the left-hand navigation.
-    2. Select the database you want to add to the failover group.
-    3. Select the name of the server under Server name to open the settings for the server.
+1. Select Azure SQL in the left-hand menu of the Azure portal. If Azure SQL isn't in the list, select All services, then type Azure SQL in the search box. (Optional) Select the star next to Azure SQL to favorite it and add it as an item in the left-hand navigation.
+2. Select the database you want to add to the failover group.
+3. Select the name of the server under Server name to open the settings for the server.
+  
+4. Select Failover groups under the Settings pane, and then select Add group to create a new failover group.
        
-    4. Select Failover groups under the Settings pane, and then select Add group to create a new failover group.
-       
-    5. On the Failover Group page, enter or select the required values, and then select Create. Either create a new secondary server, or select an existing secondary server. The secondary server in the failover group must be in a different region than the primary server.
+5. On the Failover Group page, enter or select the required values, and then select Create. Either create a new secondary server, or select an existing secondary server. The secondary server in the failover group must be in a different region than the primary server.
         ◦ Databases within the group: Choose the database you want to add to your failover group. Adding the database to the failover group will automatically start the geo-replication process.
        
 
