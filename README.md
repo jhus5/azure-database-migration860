@@ -505,3 +505,20 @@ After logging you should check that you have setup the user, testing reading the
 testing access to modify to database which should fail, as this user should correctly only have read access.
 
  <img src = screenshots/7j.png>
+ 
+ ## This completes the project. We have now setup a:
+
+- productopm (on-prem) database with a cloud backup on a weekly schedule
+ <img src = screenshots/8a.png>
+ - created a installed utilities like Azure Datbase Studio (with extensions) and SSMS to backup and migrate data
+ <img src = screenshots/8b.png>
+ - we also created a development environement, mimicking the production environment, for developers to work on setup azure storage services so we can back up and restore dev environements
+  <img src = screenshots/8c.png>
+ - we then created geo-replca of the production database as a failover in any data loss event on our primary server
+   <img src = screenshots/8d.png>
+ - and finally we controlled access to the production environment by using MS Entra ID to create sepearte Admina dn User (read-only) accounts.
+   <img src = screenshots/8e.png>
+The overall picture of the project on azure cloud can be seen on the following uml diagram:
+ 
+    <img src = screenshots/8f.png>
+
