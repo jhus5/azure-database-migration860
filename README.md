@@ -353,13 +353,19 @@ In order to do this please go back and follow the above steps and provide a new 
 To automate backups, we'll create a maintenance plan in SQL Server Management Studio:
 
 1. Connect to your production database in SSMS.
+<img src = screenshots/4i.png>
 2. Right-click on the `Management` node and select `Maintenance Plans`.
 3. Click on `New Maintenance Plan`.
-4. Give your maintenance plan a descriptive name, such as `ProductionDatabase_Backup`.
+<img src = screenshots/4j.png>
+4. Give your maintenance plan a descriptive name, such as `Weekley_Backup`.
+<img src = screenshots/4ka.png>
+<img src = screenshots/4l.png>
 5. Add a new task to the maintenance plan by clicking on `Tasks > Backup > Full Database`.
+<img src = screenshots/4n.png>
+<img src = screenshots/4n.png>
 6. Configure your backup settings, such as the destination type (local file or Azure Blob Storage), naming conventions, and frequency.
-7. Add any necessary steps for cleaning up old backups, such as deleting them after a certain retention period.
-8. Save and run your maintenance plan to start automating regular backups of your production database.
+<img src = screenshots/4n.png>
+7. Save and run your maintenance plan to start automating regular backups of your production database.
 
 
 ## Milestone 5: Disaster Recovery Simulation
